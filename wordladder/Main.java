@@ -20,6 +20,10 @@ public class Main {
 		// read in the data here
 
         // create graph here
+		
+		// IDEA: store words in graph. A word's vertex has adjacent vertexes containingf
+		//		 words were 4/5 of the letters are the same. i.e. adjancent vertexes are the
+		//		 options available to that word on the ladder.
 
         reader.close();
 
