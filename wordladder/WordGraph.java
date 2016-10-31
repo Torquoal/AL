@@ -111,9 +111,22 @@ public class WordGraph {
 		// then add predecessors to the array in reverse order, working back to start.
 		// need to alter Vertex to have predecessor element and to contain words.
 		
+		Queue<Vertex> toProcess = new LinkedList<Vertex>();
+		
+	int depth = 0;
 		// Get start's Adjacency List
 		
+		LinkedList<AdjListNode>currentList = start.getAdjList();
+		
 		// Add to toProcess List
+		
+		// Visit each node on List, add their unvisited adjacents to the List
+		
+		for (AdjListNode node: currentList){
+			Vertex v = vertices[node.getVertexNumber];
+			Visit (v, v.getIndex());
+			toProcess.add(v)
+		}
 		
 		// Visit each node on List, add their unvisited adjacents to the List
 		
