@@ -17,20 +17,15 @@ public class Main {
   
 		FileReader reader = new FileReader(inputFileName);
 		Scanner in = new Scanner(reader);
-		/**
-		while (in.hasNext()){
-			System.out.println(in.next());
-		}
-		*/
-		
-		// NOTE: Need to find a way to size the graph, then iterate over it later. Store
-		// in an array?
 		
 		List<String> wordBank = new ArrayList<String>();
 		
 		while (in.hasNext()){ 
 			wordBank.add(in.next());
 		}
+		
+		 reader.close();
+		 
 		// build graph for size of word bank
 		
 		WordGraph graph = new WordGraph(wordBank.size());
@@ -67,63 +62,16 @@ public class Main {
 				}
 				count++;
 			}
-			
+			/**
 			System.out.print("WORD: ");
 			System.out.println(currentVertex.getWord());
 			for (AdjListNode nodes:currentVertex.getAdjList()){
 				System.out.println(wordBank.get(nodes.getVertexNumber()));
 			}
+			*/
 			
 		}
-		
-
-			
-		
-		
-		/**
-			// for each vertex, we need to fill out their AdjList with words which
-			// are one letter different than they are.
-			String tempWord;
-			
-			// for each word in the file
-			
-			int count = 0;
-			
-			while (in.hasNext()){
-			
-			
-				int check = 0;
-				tempWord = in.next();
 				
-				//check to see if 4/5 chars in this word match word1
-				for (int i = 0; i < tempWord.length(); i++){
-    				char c = s.charAt(i);        
-    				if (word1.indexOf(c) != -1) check ++;
-				}
-				// if word matches conditions, add this word to AdjList with its
-				// numerical order
-				if (check == (tempWord.length() - 1)){
-					AdjListNode node = new AdjListNode(count);
-					currentList.add(node);
-				}
-				// iterate number of the word we are testing for adjacency 
-				count++:
-			}
-		*/	
-			
-			
-		
-		
-		
-		
-		// read in the data here
-
-        // create graph here
-		
-		// IDEA: store words in graph. A word's vertex has adjacent vertexes containingf
-		//		 words were 4/5 of the letters are the same. i.e. adjancent vertexes are the
-		//		 options available to that word on the ladder.
-		
 		// Breadth First Search  - see slide 25
 		// As breadth first search advances each 'path' 1 step at a time, should find the
 		// Shortest path to word2. But how do we store the inbetween words? Predecessors?	
@@ -131,7 +79,7 @@ public class Main {
 		// then add predecessors to the array in reverse order, working back to start.
 		// need to alter Vertex to have predecessor element and to contain words.			
 
-        reader.close();
+       
 
         
 		// do the work here
