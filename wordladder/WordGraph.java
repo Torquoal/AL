@@ -38,7 +38,7 @@ public class WordGraph {
 	 during a depth first traversal of the graph
 	*/
 	private void Visit(Vertex v, int p) {
-		System.out.println(v.getIndex());
+		// System.out.println(v.getWord());
 		v.setVisited(true);
 		v.setPredecessor(p);
 		LinkedList<AdjListNode> L = v.getAdjList();
@@ -61,81 +61,52 @@ public class WordGraph {
 				Visit(v, -1);
 	}
 
-	/**
-	 carry out a breadth first search/traversal of the graph
-	 psedocode version
-	 */
-	public void bfs() {
-		System.out.println("Order Visied: ");
+	
+	
+	public void wordLadder(int start, int goal) {
 		//assign each vertex to be unvisited;
-		for (Vertex v : vertices)
+		for (Vertex v : vertices){
 			v.setVisited(false);
+		}	
+		
 		//set up an initially empty queue of  
          //		visited but unprocessed vertices;
 		Queue<Vertex> toProcess = new LinkedList<Vertex>();
-  		//for each vertex v 
-		for (Vertex v: vertices){
     		//if v is not visited 
-			if (!v.getVisited()){
-      			//assign v to be visited;
-      			Visit(v, v.getIndex());
-      			//assign the predecessor of v;
-      			//add v to the queue;
-				toProcess.add(v);
-      			//while the queue is not empty {
-				while (toProcess.peek() != null){
-        			//remove vertex u from the queue;
-					Vertex u = toProcess.remove();
-        			//for each vertex w in the adjacency list of u 
-					for (int i = 0; i < u.getAdjList().size(); i++){
-						Vertex w = vertices[u.getAdjList().get(i).getVertexNumber()];
-        				//if w is unvisited 
-						if (!w.getVisited()){
-           					//assign w to be visited;
-           					//assign the predecessor of w;
-							Visit(w, w.getIndex());
+      		//assign v to be visited;
+      		vertices[start].setVisited(true);
+      		vertices[start].setPredecessor(-1);
+      		//assign the predecessor of v;
+      		//add v to the queue;
+			toProcess.add(vertices[start]);
+      		//while the queue is not empty {
+			while (toProcess.peek() != null){
+        		//remove vertex u from the queue;
+				Vertex u = toProcess.remove();
+        		//for each vertex w in the adjacency list of u 
+				for (int i = 0; i < u.getAdjList().size(); i++){
+					Vertex w = vertices[u.getAdjList().get(i).getVertexNumber()];
+        			//if w is unvisited 
+					if (!w.getVisited()){
+           				//assign w to be visited;
+           				//assign the predecessor of w;
+						w.setVisited(true);
+						w.setPredecessor(u.getIndex());
+						//System.out.println(w.getWord());
+						if (w.getIndex() == goal){
+							while (w.getPredecessor() != -1){
+								System.out.println (vertices[w.getPredecessor()].getWord());
+								w = vertices[w.getPredecessor()];
+							}
+							return;
+						}
            					//add w to the queue;
-							toProcess.add(w);
-         				} 
-       				}
+						toProcess.add(w);
+         			} 
        			}
-    		}
-    	}
+       		}
+       			System.out.println("No viable word ladder exists");
 	}
 	
-	public void wordLadder(Vertex start, Vertex end) {
-		// Breadth First Search  - see slide 25
-		// As breadth first search advances each 'path' 1 step at a time, should find the
-		// Shortest path to word2. But how do we store the inbetween words? Predecessors?	
-		// Perhaps once word2 found, create string array of size = steps to find word2			
-		// then add predecessors to the array in reverse order, working back to start.
-		// need to alter Vertex to have predecessor element and to contain words.
-		
-		Queue<Vertex> toProcess = new LinkedList<Vertex>();
-		
-	int depth = 0;
-		// Get start's Adjacency List
-		
-		LinkedList<AdjListNode>currentList = start.getAdjList();
-		
-		// Add to toProcess List
-		
-		// Visit each node on List, add their unvisited adjacents to the List
-		
-		for (AdjListNode node: currentList){
-			Vertex v = vertices[node.getVertexNumber];
-			Visit (v, v.getIndex());
-			toProcess.add(v)
-		}
-		
-		// Visit each node on List, add their unvisited adjacents to the List
-		
-		// Repeat until word2 is reached or toProcess is empty
-		
-		// if word2 reached, create ArrayList and add word2 and its pedecessor to it
-		// keep adding predecessors until back at word1.
-		// then print ArrayList in reverse order (?)
-		
-	}
 
 }

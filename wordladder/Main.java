@@ -14,11 +14,16 @@ public class Main {
 		String inputFileName = args[0]; // dictionary
 		String word1 = args[1]; // first word
 		String word2 = args[2]; // second word
+		
+		int in1 = 0;
+		int in2 = 0;
   
 		FileReader reader = new FileReader(inputFileName);
 		Scanner in = new Scanner(reader);
 		
 		List<String> wordBank = new ArrayList<String>();
+		int word1In = 0;
+		int word2In = 0;
 		
 		while (in.hasNext()){ 
 			wordBank.add(in.next());
@@ -32,9 +37,21 @@ public class Main {
 		
 		// fill the graph with words
 		for (int i = 0; i<wordBank.size(); i++){
+		
+			//System.out.println(wordBank.get(i));
+			//System.out.println(word1);
+			if (wordBank.get(i).equals(word1)){
+				in1 = i;
+				System.out.println(wordBank.get(i));
+			}
+			
+			if (wordBank.get(i).equals(word2)){
+				in2 = i;
+			}
 
 			Vertex currentVertex = graph.getVertex(i);
 			currentVertex.setWord(wordBank.get(i));
+		
 			
 			// now that word is added to Vertex, we should iterate over the 
 			// wordBank and look for adjacent possibilities, then add them
@@ -72,6 +89,7 @@ public class Main {
 			
 		}
 				
+		graph.wordLadder(in1, in2);		
 		// Breadth First Search  - see slide 25
 		// As breadth first search advances each 'path' 1 step at a time, should find the
 		// Shortest path to word2. But how do we store the inbetween words? Predecessors?	

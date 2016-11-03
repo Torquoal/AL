@@ -8,6 +8,7 @@ public class Vertex {
    
     private LinkedList<AdjListNode> adjList ; // the adjacency list of the vertex 
     private int index; // the index of the vertex
+    String word;
     
     // possibly other fields, for example representing data
     // stored at the node, whether the vertex has been visited
@@ -32,10 +33,21 @@ public class Vertex {
     	adjList = v.getAdjList();
     	index = v.getIndex();
     	visited = v.getVisited();
+    	predecessor = v.getPredecessor();
+    	word = v.getWord();	//ADDED: store a word in each Vertex
+    	
     }
      
     public LinkedList<AdjListNode> getAdjList(){
         return adjList;
+    }
+    
+    public String getWord(){
+    	return word;
+    }
+    
+    public void setWord(String w){
+    	word = w;
     }
     
     public int getIndex(){

@@ -81,8 +81,9 @@ public class Graph {
     		//if v is not visited 
 			if (!v.getVisited()){
       			//assign v to be visited;
+      			Visit(v, v.getIndex());
       			//assign the predecessor of v;
-				Visit(v, v.getIndex());
+				
       			//add v to the queue;
 				toProcess.add(v);
       			//while the queue is not empty {
